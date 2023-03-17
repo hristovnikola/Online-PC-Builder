@@ -1,0 +1,126 @@
+﻿@model Proekt2.Models.CustomMade
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<html>
+<head>
+    <style>
+        .btn-primary {
+            color: #fff;
+            background-color: #128FC8;
+            border-color: #128FC8;
+        }
+
+        .bg-primary {
+            /*background: #162D5D !important;*/
+            background: #128FC8 !important;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container py-4">
+        <h2 class="text-center">@Model.Name</h2>
+        <hr />
+    </div>
+
+
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-5 pb-4 pb-lg-0">
+                <img class="img-fluid w-100" src="@Model.ImgURL" />
+                <div class="bg-primary text-dark text-center p-4">
+                    <h3 class="m-0" style="color: white">$@Model.Price,99</h3>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Processor)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Processor)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MotherBoard)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MotherBoard)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Storage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Storage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PowerSupply)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PowerSupply)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RAM)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.RAM)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.GraphicsCard)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.GraphicsCard)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Case)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Case)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Price)
+                    </dd>
+                </dl>
+
+
+                <div class="d-flex justify-content-end just pb-0">
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Seller"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary mt-3 py-2 px-4 me-3" })
+
+                    }
+                    @Html.ActionLink("Back to List", "Index", "Home", new { }, new { @class = "btn btn-primary mt-3 py-2 px-4" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

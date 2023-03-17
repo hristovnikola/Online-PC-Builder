@@ -1,0 +1,67 @@
+﻿@model Proekt2.Models.AddToRoleModel
+
+<html>
+
+<head>
+    <style>
+        .roles{
+            flex-direction: revert;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        header, footer {
+            display: none;
+        }
+
+        .topbar {
+            display: none;
+        }
+
+        .footer-dark {
+            display: none;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #128FC8;
+            border-color: #128FC8;
+        }
+
+        .bottom_right {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="roles">
+        @using (Html.BeginForm("AddUserToRole", "Account"))
+        {
+            <h2>Add a user to a role</h2>
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control w-100 mb-2" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Roles")
+                @Html.DropDownListFor(z => z.SelectedRole, new SelectList(Model.Roles), new { @class = "form-control w-100" })
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3 py-2 px-4 w-100">Save</button>
+        }
+    </div>
+
+    <div class="bottom_right">
+        @Html.ActionLink("Back to the main page", "Index", "Home", new { }, new { @class = "btn btn-primary mt-3 py-2 px-4 w-100" })
+    </div>
+</body>
+</html>

@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/771/771247.png" type="image/x-icon">
+    <link href="img/favicon.ico" rel="icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/DataTables/datatables.min.css" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <title>Online PC Builder</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        hr {
+            color: #128FC8;
+        }
+
+        h1 {
+            font-weight: 800 !important;
+        }
+
+        .mr-2 {
+            margin-right: 0.5rem !important;
+        }
+
+        .heading{
+            transition: transform 0.3s ease-in-out; 
+        }
+
+        .heading:hover{
+            transform: scale(1.03);
+        }
+
+        .navbar {
+            color: #128FC8;
+        }
+
+            .navbar:hover {
+                color: #128FC8;
+            }
+
+        ::-webkit-scrollbar {
+            width: .60rem;
+            background-color: white;
+            border-radius: .5rem;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #128FC8;
+            border-radius: .5rem;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background-color: #0b5ed7;
+            }
+
+        .form-control {
+            border-color: #128FC8;
+            background: #F9F8FA;
+            width: 228px;
+            height: 38px;
+        }
+
+        .btn-outline-success {
+            border-color: #128FC8;
+            color: #128FC8;
+            height: 38px;
+            width: 114px;
+        }
+
+        .fab:hover {
+            transform: scale(1.05);
+        }
+
+        .footer-dark {
+            padding: 50px 0;
+            color: #f0f9ff;
+            background-color: #128FC8;
+        }
+
+            .footer-dark h3 {
+                margin-top: 0;
+                margin-bottom: 12px;
+                font-weight: bold;
+                font-size: 16px;
+            }
+
+            .footer-dark ul {
+                padding: 0;
+                list-style: none;
+                line-height: 1.6;
+                font-size: 14px;
+                margin-bottom: 0;
+            }
+
+                .footer-dark ul a {
+                    color: inherit;
+                    text-decoration: none;
+                    opacity: 0.6;
+                }
+
+                    .footer-dark ul a:hover {
+                        opacity: 0.8;
+                    }
+
+            .footer-dark .item.text {
+                margin-bottom: 36px;
+            }
+
+                .footer-dark .item.text p {
+                    opacity: 0.6;
+                    margin-bottom: 0;
+                }
+
+            .footer-dark .copyright {
+                text-align: center;
+                padding-top: 24px;
+                opacity: 0.5;
+                font-size: 13px;
+                margin-bottom: 0;
+            }
+
+        .bg-light {
+            color: #5CDB95 !important;
+        }
+
+        .login{
+            text-decoration: none;
+            color: rgba(0, 0, 0, 0.70);
+        }
+        .login:hover {
+            text-decoration: none;
+            color: rgba(0, 0, 0, 0.70);
+        }
+        .login:focus {
+            text-decoration: none;
+            color: rgba(0, 0, 0, 0.70);
+        }
+        .fa-cart-shopping, .fa-house, .fa-laptop {
+            color: #128FC8;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container-fluid topbar" style="background: #128FC8;">
+        <div class="row py-2 px-lg-5">
+            <div class="col-lg-6 text-center text-lg-start mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center text-white">
+                    <small><i class="fa-solid fa-envelope mr-2"></i>nikola.hristov@students.finki.ukim.mk</small>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-end">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-white px-2" href="https://www.facebook.com/nikola.hristov.7547" target="_blank">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a class="text-white px-2" href="https://www.linkedin.com/in/nikola-hristov-729b01235/" target="_blank">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-white px-2" href="https://www.instagram.com/hristovnikola_/" target="_blank">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="header sticky-top">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5 ">
+            <div class="container-fluid p-2">
+                <h1 class="heading">@Html.ActionLink("Online PC Builder", "Index", "Home", new { }, new { @class = "nav-link navbar" })</h1>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-link">
+                            @Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "login" })
+                            <i class="fa-solid fa-house"></i>
+                        </li>
+                        <li class="nav-link">
+                            @Html.ActionLink("Products", "Index", "Products", new { }, new { @class = "login" })
+                            <i class="fa-solid fa-laptop"></i>
+                        </li>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li class="nav-link">
+                                @Html.ActionLink("Cart", "Index", "PurchasedProducts", new { }, new { @class = "login" })
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </li>
+                        }
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Seller"))
+                        {
+                            <li class="nav-link">
+                                @Html.ActionLink("Add Product", "Create", "Products", new { }, new { @class = "login" })
+                            </li>
+                            <li class="nav-link">
+                                @Html.ActionLink("Add PC", "Create", "CustomMades", new { }, new { @class = "login" })
+                            </li>
+
+                        }
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <li class="nav-link">
+                                @Html.ActionLink("Add to Role", "AddUserToRole", "Account", new { }, new { @class = "login" })
+                            </li>
+                        }
+                    </ul>
+
+                    <div class="d-flex">
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div>
+        @RenderBody()
+    </div>
+
+
+    <div class="footer-dark">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 item text-center">
+                        <h3>Services</h3>
+                        <ul>
+                            <li>@Html.ActionLink("Home", "Index", "Home", new { })</li>
+                            <li>@Html.ActionLink("Products", "Index", "Products")</li>
+                            <li>@Html.ActionLink("Add Product", "Create", "Products")</li>
+                            <li>@Html.ActionLink("Add PC", "Create", "CustomMades")</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-3 item text-center mt-lg-0 mt-md-0 mt-sm-0 mt-3">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="https://www.facebook.com/nikola.hristov.7547" target="_blank">Facebook</a></li>
+                            <li><a href="https://www.linkedin.com/in/nikola-hristov-729b01235/" target="_blank">Linkedin</a></li>
+                            <li><a href="https://www.instagram.com/hristovnikola_/" target="_blank">Instagram</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 item text text-center mt-lg-0 mt-md-0 mt-sm-0 mt-3">
+                        <h3>Online PC Builder</h3>
+                        <p>
+                            Online PC Builder is a online shop on which you can make your dream PC. Simply just choose the components
+                            you like, add them to your shopping cart and the rest is our job. We will built your PC in matter of days
+                            and you will have it sooner then you think.
+                        </p>
+                    </div>
+                </div>
+                <p class="copyright">Online PC Builder © Nikola Hristov</p>
+            </div>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="~/DataTables/datatables.min.js"></script>
+</body>
+</html>

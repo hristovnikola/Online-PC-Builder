@@ -1,0 +1,117 @@
+﻿@using Proekt2.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        header, footer {
+            display: none;
+        }
+
+        .topbar {
+            display: none;
+        }
+
+        .footer-dark {
+            display: none;
+        }
+
+        #loginForm {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #128FC8;
+            border-color: #128FC8;
+        }
+
+        .bottom_right {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+        }
+    </style>
+</head>
+    
+<body>
+    <div id="loginForm">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center">Log in</h2>
+            </div>
+            <div class="col-12">
+                <section>
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <hr />
+                        <p>Please login to your account</p>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control w-100 mb-3", placeholder = "Email" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control  w-100", placeholder = "Password" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group mt-2">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Log in" class="btn btn-primary mt-3 py-2 px-4 me-3 w-100" />
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-center mt-3">
+                            <p class="mb-0 me-2">Don't have an account?</p>
+                            @Html.ActionLink("Create new", "Register", new { }, new { @class = "btn btn-primary py-2 px-4 me-3" })
+                        </div>
+
+
+                        @* Enable this once you have account confirmation enabled for password reset functionality
+                            <p>
+                                @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                            </p>*@
+                    }
+                </section>
+            </div>
+            <!--
+            <div class="col-md-4">
+            <section id="socialLoginForm">
+                majmunce Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+            </div>
+            -->
+        </div>
+    </div>
+
+    <div class="bottom_right">
+        @Html.ActionLink("Back to the main page", "Index", "Home", new { }, new { @class = "btn btn-primary mt-3 py-2 px-4 w-100" })
+    </div>
+</body>
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

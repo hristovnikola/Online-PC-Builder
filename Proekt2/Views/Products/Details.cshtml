@@ -1,0 +1,125 @@
+﻿@model Proekt2.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<html>
+<head>
+    <style>
+        .btn-primary {
+            color: #fff;
+            background-color: #128FC8;
+            border-color: #128FC8;
+        }
+
+        .bg-primary {
+            /*background: #162D5D !important;*/
+            background: #128FC8 !important;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .disabled{
+            background: grey !important;
+            border: grey !important;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container py-4">
+        <h2 class="text-center">@Model.Name</h2>
+        <div>
+            <h4 class="text-center">@Model.ShortDescription</h4>
+            <hr />
+        </div>
+    </div>
+
+
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-5 pb-4 pb-lg-0">
+                <img class="img-fluid w-100" src="@Model.ImgURL" />
+                <div class="bg-primary text-dark text-center p-4">
+                    <h3 class="m-0" style="color: white">$@Model.Price,99</h3>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LongDescription)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LongDescription)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.InStock)
+                    </dt>
+
+                    <dd>
+                        @if (Model.InStock)
+                        {
+                            <span class="badge alert-success">In Stock</span>
+
+                        }
+                        else
+                        {
+                            <span class="badge alert-danger">Nema Zaliha</span>
+                        }
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Category)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Category)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Manufacturer)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Manufacturer)
+                    </dd>
+                </dl>
+
+
+
+                <div class="d-flex justify-content-end just pb-0">
+
+
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Seller"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary mt-3 py-2 px-4 me-3" })
+                    }
+
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Seller") || User.IsInRole("Client"))
+                    {
+                        if (Model.InStock)
+                        {
+                            @Html.ActionLink("Add to cart", "AddToCart", "PurchasedProducts", new { id = Model.Id, returnUrl = Request.RawUrl }, new { @class = "btn btn-primary mt-3 py-2 px-4 me-3" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Add to cart", "AddToCart", "PurchasedProducts", new { id = Model.Id, returnUrl = Request.RawUrl }, new { @class = "btn btn-primary mt-3 py-2 px-4 me-3 disabled" })
+                        }
+                    }
+
+                    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-primary mt-3 py-2 px-4" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Proekt2.Models.PurchasedProduct>
+
+@{
+    ViewBag.Title = "Index";
+}
+<html>
+<head>
+    <style>
+        .btn-primary {
+            color: #fff;
+            background-color: #128FC8;
+            border-color: #128FC8;
+        }
+
+        .bg-primary {
+            /*background: #162D5D !important;*/
+            background: #128FC8 !important;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .bootbox-close-button {
+            display: none !important;
+        }
+
+        .modal-footer button:last-of-type {
+            background-color: #128FC8 !important;
+            color: white;
+            border: none;
+        }
+
+        .page-item.active .page-link {
+            background: #128FC8 !important;
+            border-color: #128FC8 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container my-5">
+
+        <h2 class="mb-5 text-center">Shopping cart</h2>
+
+        <table class="table" id="my_table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th class="d-none d-md-block">
+                        @Html.DisplayNameFor(model => model.ImgURL)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th style="width: 70px">
+
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td class="d-none d-md-block">
+                            <img class="img-fluid" style="width: 200px" src="@item.ImgURL" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Remove", "Delete", new { id = item.Id, returnUrl = Request.RawUrl }, new { @class = "btn btn-primary py-2 px-4" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="total mt-2 fw-bold" >
+            @{
+                var sum = 0;
+                foreach (var item in Model)
+                {
+                    sum += item.Price;
+                }
+            }
+            <p class="text-center" style="font-size: larger ">Total price : @sum</p>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary py-2 px-4 js-checkout"> Proceed to checkout <i class="fa-solid fa-cart-shopping text-white"></i></button>
+        </div>
+
+    </div>
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+
+                $("#my_table").DataTable();
+
+                $(".js-checkout").on("click", function () {
+                    bootbox.confirm("Do you want to buy these products?", function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/PurchasedProducts/EmptyCart",
+                                method: "GET",
+                                success: function () {
+
+                                }
+                            });
+                            $(document).ajaxStop(function () {
+                                window.location.reload();
+                            });
+                        }
+                    });
+                })
+            })
+
+        </script>
+    }
+
+</body>
+</html>

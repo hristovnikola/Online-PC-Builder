@@ -1,0 +1,201 @@
+﻿@model PagedList.IPagedList<Proekt2.Models.Product>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+
+<html>
+
+<head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+   
+    <style>
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .jumbotron {
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+            background-color: #e9ecef;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url(https://c8.alamy.com/comp/2GA76G7/wide-banner-of-parts-and-components-for-modern-desktop-computer-mainboard-power-supply-ram-ssd-hard-disk-cpu-cooler-graphics-card-and-midi-tower-pc-c-2GA76G7.jpg);
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #128FC8;
+            border-color: #128FC8;
+        }
+
+        .jumbotron-fluid {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+        .text-primary {
+            color: #128FC8 !important;
+        }
+
+        .card:hover {
+            cursor: pointer;
+        }
+
+        .card {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .team img {
+            position: relative;
+            z-index: 1;
+        }
+
+        .team .team-text {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            bottom: 0px;
+            left: 0;
+            border-bottom: 5px solid #128FC8;
+            transition: .5s;
+        }
+
+        .team:hover .team-text {
+            bottom: 100px;
+        }
+
+        .team .team-social {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            bottom: -100px;
+            left: 0;
+            transition: .5s;
+        }
+
+        .team:hover .team-social {
+            bottom: 0;
+        }
+
+        .bg-primary {
+            background-color: #128FC8 !important;
+        }
+
+        .bg-secondary {
+            background-color: #F2F2F4 !important;
+        }
+
+        .active .page-link {
+            background-color: #128FC8 !important;
+            border-color: #128FC8 !important;
+        }
+
+        .page-item .page-link:not(.active .page-link) {
+            color: #128FC8 !important;
+        }
+
+        .forsearch{
+            background-color: white !important;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="jumbotron jumbotron-fluid mb-5 h-auto">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3">Start building your PC now!</h1>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0">
+                    <a class="text-white" href="" style="text-decoration: none;">
+                        Select as many PC components as you like and put them in your shopping cart.
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="text-center">Select a product and add it to your shopping cart</h2>
+
+        @using (Html.BeginForm("Index", "Products"))
+        {
+            <div class="input-group mt-3 justify-content-end">
+                <div class="form-outline">
+                    @Html.TextBox("SearchString", "", new { @class = "form-control forsearch", type = "search", placeholder = "Search a component..." })
+                </div>
+                <input type="submit" class="btn btn-primary" value="Search" />
+
+            </div>
+        }
+
+        <hr />
+
+
+    </div>
+
+   
+
+    <div class="container-fluid pt-5 mb-5">
+        <div class="container">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-3 col-md-6">
+                        <div class="team card position-relative overflow-hidden border-0 mb-5">
+                            <img class="card-img-top" src="@item.ImgURL" alt="">
+                            <div class="card-body text-center p-0">
+                                <div class="team-text d-flex flex-column justify-content-center bg-secondary  ">
+                                    <h5 class="font-weight-bold">@item.Name </h5>
+                                    <span>$@item.Price,99</span>
+                                </div>
+                                <div class="team-social d-flex align-items-center justify-content-center bg-primary">
+                                    @if (User.IsInRole("Administrator") || User.IsInRole("Seller"))
+                                    {
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-dark btn-social ms-2 me-2 " })
+                                    }
+
+                                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-dark btn-social me-2 " })
+                                    
+                                    @if (User.IsInRole("Administrator") || User.IsInRole("Seller"))
+                                    {
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-dark btn-social me-2" })
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="d-flex justify-content-center pagination mb-5">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+    </div>
+
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+                $(".pagination li").addClass("page-item");
+                $(".pagination li a").addClass("page-link");
+            })
+        </script>
+    }
+</body>
+</html>
+
+
+
+
+
+
